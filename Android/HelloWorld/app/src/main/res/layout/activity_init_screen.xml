@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="kr.linkb.helloworld.ArduinoActivity">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <!--<Spinner-->
+            <!--android:id="@+id/spinner"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"></Spinner>-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+             android:textSize="30dp"
+            android:textColor="#0000ff"
+            android:gravity="center"
+            android:text="센서 정보 관리"/>
+
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="430dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="View"
+                android:layout_weight="25"
+                android:onClick="clickViewButton"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Add"
+                android:layout_weight="25"
+                android:onClick="clickAddButton"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Modify"
+                android:layout_weight="25"
+                android:onClick="clickModifyButton"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Delete"
+                android:layout_weight="25"
+                android:onClick="clickDeleteButton"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>
