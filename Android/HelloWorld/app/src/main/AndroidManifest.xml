@@ -62,4 +62,6 @@
         <activity android:name=".SensorDeleteActivity"></activity>
     </application>
 
+    <!-- -->
+
 </manifest>
