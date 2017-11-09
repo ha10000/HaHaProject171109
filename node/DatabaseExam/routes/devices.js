@@ -77,8 +77,8 @@ router.post('/led/:color/:flag', function(req, res, next) {
 		else flag = '7';
 	}
 	var commandLogs = dbObj.collection('commandLogs');
-	commandLogs.save({target:'led', command:req.params.color, 
-		command.req.params.flag, created_at:new Date()},
+	commandLogs.save({target:'led',color:req.params.color,
+		command:req.params.flag,created_at:new Date()},
 		function(err, result){
 			if (flag == '2' || flag == '4' || flag == '6') {
 					client.publish('test', '3'); 
