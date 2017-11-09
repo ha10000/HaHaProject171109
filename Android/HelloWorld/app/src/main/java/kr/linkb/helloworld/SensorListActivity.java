@@ -2,6 +2,7 @@ package kr.linkb.helloworld;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,11 +42,15 @@ public class SensorListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(SensorListActivity.this, position+"",
                         Toast.LENGTH_LONG).show();
-                new GetSensorLists().execute("arduino", sensors[position]);
-                Log.d(this.getClass().getName(), "haha---------before 0");
+//                new GetSensorLists().execute("arduino", sensors[position]);
+
+                 Log.d(this.getClass().getName(), "haha---------before 0");
+                Intent intent = new Intent(SensorListActivity.this,
+                        ArduinoActivity.class);
+                intent.putExtra("sensor", sensors[position]);
+                startActivity(intent);
             }
         });
-//        new GetSensorLists().execute(sensors[0]);;
         new GetSensorLists().execute(sensors[0]);;
     }
 
@@ -57,7 +62,8 @@ public class SensorListActivity extends AppCompatActivity {
 //        }
         int id, user_id; String mac_address; String created_at;
         SensorItem(int id, int user_id, String mac_address, String created_at) {
-            this.id = id; this.user_id = user_id; this.mac_address = mac_address; this.created_at = created_at ;
+            this.id = id; this.user_id = user_id; this.mac_address = mac_address;
+            this.created_at = created_at ;
         }
     }
     ArrayList<SensorItem> sensor_items = new ArrayList<SensorItem>();
@@ -76,10 +82,10 @@ public class SensorListActivity extends AppCompatActivity {
             TextView textview2 = (TextView)view.findViewById(R.id.user_id);
             TextView textview3 = (TextView)view.findViewById(R.id.mac_address);
             TextView textview4 = (TextView)view.findViewById(R.id.created_at);
-            textview1.setText(sensor_items.get(position).id+"");
-            textview2.setText(sensor_items.get(position).user_id+"");
-            textview3.setText(sensor_items.get(position).mac_address+"");
-            textview4.setText(sensor_items.get(position).created_at);
+            textview1.setText("SENSOR ID :" + sensor_items.get(position).id+"");
+            textview2.setText("USER ID :" + sensor_items.get(position).user_id+"");
+            textview3.setText("SENSOR_주소:" + sensor_items.get(position).mac_address+"");
+            textview4.setText("생성일 :" + sensor_items.get(position).created_at);
             return view;
         }
     }
@@ -88,6 +94,7 @@ public class SensorListActivity extends AppCompatActivity {
     public void clickSensorAddButton(View view) {
 //        new SensorAdd().execute("sensorName","SensorDevice");
     }
+
     class GetSensorLists extends AsyncTask<String, String, String> {
         ProgressDialog dialog = new ProgressDialog(SensorListActivity.this);
 
@@ -152,8 +159,13 @@ public class SensorListActivity extends AppCompatActivity {
 //                        sensor_items.add(new SensorItem(obj.getInt("user_id"), obj.getInt("analog"),
 //                                obj.getString("created_at")));
 //                    }
+                    /*
                     sensor_items.add(new SensorItem(obj.getInt("id"), obj.getInt("user_id"),
                             obj.getString("mac_address"),obj.getString("created_at")));
+                            */
+                    sensor_items.add(new SensorItem(obj.getInt("id"), obj.getInt("user_id"),
+                            obj.getString("mac_address"),obj.getString("created_at")));
+
                 }
                 SensorItemAdapter adapter = new SensorItemAdapter(SensorListActivity.this);
                 ListView listView = (ListView)findViewById(R.id.listview);

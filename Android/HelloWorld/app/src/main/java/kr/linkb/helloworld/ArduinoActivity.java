@@ -1,6 +1,7 @@
 package kr.linkb.helloworld;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -32,6 +34,10 @@ public class ArduinoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_arduino);
+
+        Intent intent = getIntent();
+        String sensorName = intent.getStringExtra("sensor");
+        Toast.makeText(ArduinoActivity.this, sensorName, Toast.LENGTH_SHORT).show();
 
         final String sensors[] = { "dht11", "mq2" };
         ArrayAdapter<String> spinnerAdapter =
@@ -83,8 +89,8 @@ public class ArduinoActivity extends AppCompatActivity {
             StringBuffer response = new StringBuffer();
             try {
 
-//                String apiURL = "http://192.168.0.27:3000/devices/"+params[0]+"/"+params[1];
-                String apiURL = "http://192.168.0.35:3000/devices/"+params[0]+"/"+params[1];
+                String apiURL = "http://192.168.0.27:3000/devices/"+params[0]+"/"+params[1];
+//                String apiURL = "http://192.168.0.35:3000/devices/"+params[0]+"/"+params[1];
                 URL url = new URL(apiURL);
                 HttpURLConnection con = (HttpURLConnection)url.openConnection();
                 con.setRequestMethod("GET");
@@ -156,8 +162,8 @@ public class ArduinoActivity extends AppCompatActivity {
         protected String doInBackground(String... params) {
             StringBuffer response = new StringBuffer();
             try {
-//                String urlString = "http://192.168.0.27:3000/devices/"+params[0]+"/"+params[1];
-                String urlString = "http://192.168.0.35:3000/devices/"+params[0]+"/"+params[1];
+                String urlString = "http://192.168.0.27:3000/devices/"+params[0]+"/"+params[1];
+//                String urlString = "http://192.168.0.35:3000/devices/"+params[0]+"/"+params[1];
                 URL url = new URL(urlString);
                 HttpURLConnection con = (HttpURLConnection)url.openConnection();
                 con.setRequestMethod("POST");
