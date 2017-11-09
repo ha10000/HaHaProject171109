@@ -63,22 +63,23 @@ public class SensorListActivity extends AppCompatActivity {
     ArrayList<SensorItem> sensor_items = new ArrayList<SensorItem>();
     class SensorItemAdapter extends ArrayAdapter {
         public SensorItemAdapter(Context context) {
-            super(context, R.layout.list_sensor_item, sensor_items);
+            super(context, R.layout.list_sensor_item2, sensor_items);
         }
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             View view = convertView;
             if (view == null) {
                 LayoutInflater inflater = (LayoutInflater)getSystemService(LAYOUT_INFLATER_SERVICE);
-                view = inflater.inflate(R.layout.list_sensor_item, null);
+                view = inflater.inflate(R.layout.list_sensor_item2, null);
             }
-            TextView tempText = (TextView)view.findViewById(R.id.temp);
-            TextView humidityText = (TextView)view.findViewById(R.id.humidity);
-            TextView createdAtText = (TextView)view.findViewById(R.id.created_at);
-            tempText.setText(sensor_items.get(position).id+"");
-            humidityText.setText(sensor_items.get(position).user_id+"");
-            createdAtText.setText(sensor_items.get(position).mac_address+"");
-            createdAtText.setText(sensor_items.get(position).created_at);
+            TextView textview1 = (TextView)view.findViewById(R.id.id);
+            TextView textview2 = (TextView)view.findViewById(R.id.user_id);
+            TextView textview3 = (TextView)view.findViewById(R.id.mac_address);
+            TextView textview4 = (TextView)view.findViewById(R.id.created_at);
+            textview1.setText(sensor_items.get(position).id+"");
+            textview2.setText(sensor_items.get(position).user_id+"");
+            textview3.setText(sensor_items.get(position).mac_address+"");
+            textview4.setText(sensor_items.get(position).created_at);
             return view;
         }
     }
@@ -118,8 +119,10 @@ public class SensorListActivity extends AppCompatActivity {
                 String inputLine;
                 while ((inputLine = br.readLine()) != null) {
                     response.append(inputLine);
+/*
                     params[0] = inputLine; //haha
                     Log.d(this.getClass().getName(), inputLine);
+  */
                 }
                 br.close();
             } catch (Exception e) { e.printStackTrace(); }
@@ -134,8 +137,11 @@ public class SensorListActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             dialog.dismiss();
+            Log.i("result", s);
+
             try {
                 JSONArray array = new JSONArray(s);//JSON 문자열 -> JSON 객체로 변환
+                Log.i("length", array.length()+"");
                 sensor_items.clear();
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject obj = array.getJSONObject(i);
@@ -146,7 +152,7 @@ public class SensorListActivity extends AppCompatActivity {
 //                        sensor_items.add(new SensorItem(obj.getInt("user_id"), obj.getInt("analog"),
 //                                obj.getString("created_at")));
 //                    }
-                    sensor_items.add(new SensorItem(obj.getInt("id"), obj.getInt("usr_id"),
+                    sensor_items.add(new SensorItem(obj.getInt("id"), obj.getInt("user_id"),
                             obj.getString("mac_address"),obj.getString("created_at")));
                 }
                 SensorItemAdapter adapter = new SensorItemAdapter(SensorListActivity.this);
