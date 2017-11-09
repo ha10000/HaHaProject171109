@@ -46,7 +46,7 @@ public class SensorListActivity extends AppCompatActivity {
 
                  Log.d(this.getClass().getName(), "haha---------before 0");
                 Intent intent = new Intent(SensorListActivity.this,
-                        ArduinoActivity.class);
+                        Arduino2Activity.class);
                 intent.putExtra("sensor", sensors[position]);
                 startActivity(intent);
             }
