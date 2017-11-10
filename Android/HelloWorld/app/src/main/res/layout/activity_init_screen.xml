@@ -6,54 +6,59 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="kr.linkb.helloworld.ArduinoActivity">
+    tools:context="kr.linkb.helloworld.InitScreenActivity">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <!--<Spinner-->
-            <!--android:id="@+id/spinner"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"></Spinner>-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
              android:textSize="30dp"
             android:textColor="#0000ff"
             android:gravity="center"
-            android:text="센서 정보 관리"/>
-
-        <ListView
-            android:id="@+id/listview"
-            android:layout_width="match_parent"
-            android:layout_height="430dp"/>
+            android:text="초기 화면"/>
         <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:text="사용자아이디 :"
+                android:textSize="20dp"
+                android:textColor="#0000ff"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <EditText
+                android:id="@+id/user_id"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+        <ImageView
+            android:id="@+id/image"
+            android:layout_gravity="center"
+            android:layout_width="400dp"
+            android:layout_height="400dp"
+            android:src="@drawable/coala1" />
+        <LinearLayout
+            android:layout_gravity="bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <Button
+                android:textColor="#0000ff"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="View"
+                android:text="로그인"
                 android:layout_weight="25"
-                android:onClick="clickViewButton"/>
+                android:onClick="clickLoginButton"/>
             <Button
+                android:textColor="#00ffff"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Add"
+                android:text="네크워크 설정"
                 android:layout_weight="25"
-                android:onClick="clickAddButton"/>
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Modify"
-                android:layout_weight="25"
-                android:onClick="clickModifyButton"/>
-            <Button
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="Delete"
-                android:layout_weight="25"
-                android:onClick="clickDeleteButton"/>
+                android:onClick="clickSettingButton"/>
+
         </LinearLayout>
 
     </LinearLayout>

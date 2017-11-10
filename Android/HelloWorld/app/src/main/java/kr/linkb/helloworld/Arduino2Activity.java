@@ -31,10 +31,14 @@ public class Arduino2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_arduino2);
 
         Intent intent = getIntent();
-        String sensorName = intent.getStringExtra("sensor");
+//        String sensor = intent.getStringExtra("sensor");
+        String deviceName = intent.getStringExtra("device_name");
+        String sensorName = intent.getStringExtra("sensor_name");
+        int user_id = intent.getExtras().getInt("user_id");
         Toast.makeText(Arduino2Activity.this, sensorName, Toast.LENGTH_SHORT).show();
+        Toast.makeText(Arduino2Activity.this, String.valueOf(user_id), Toast.LENGTH_SHORT).show();
 
-        new LoadSensorLogData().execute("arduino", "dht11");
+        new LoadSensorLogData().execute("arduino", "dht11", String.valueOf(user_id));
     }
     class Item {
         int temp, humidity; String created_at;
@@ -49,6 +53,7 @@ public class Arduino2Activity extends AppCompatActivity {
         }
 
         String[] FieldString = {"온도 : ", "습도 : ", "생성일 :"};
+        String[] FieldString2 = {"digital Value : ", "Analog Value : ", "생성일 :"};
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {

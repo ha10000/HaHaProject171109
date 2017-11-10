@@ -49,22 +49,25 @@
         <activity android:name=".SQLiteDatabaseActivity" />
         <activity android:name=".SensorActivity" />
         <activity android:name=".SensorMonitorActivity" />
-        <activity android:name=".ArduinoActivity"></activity>
+        <activity android:name=".ArduinoActivity" />
         <activity android:name=".SelectSensorListActivity" />
         <activity android:name=".SensorAddActivity" />
-        <activity android:name=".InitScreenActivity" />
-        <activity android:name=".SensorModifyActivity" />
-        <activity android:name=".SensorDeleteActivity" />
-        <activity android:name=".SensorListActivity">
-
-        </activity>
-        <activity android:name=".Arduino2Activity">
+        <activity android:name=".InitScreenActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SensorModifyActivity" />
+        <activity android:name=".SensorDeleteActivity" />
+        <activity android:name=".SensorListActivity">
+
+        </activity>
+        <activity android:name=".Arduino2Activity">
+
+        </activity>
+        <activity android:name=".NetworkSetActivity"></activity>
     </application>
 
 </manifest>

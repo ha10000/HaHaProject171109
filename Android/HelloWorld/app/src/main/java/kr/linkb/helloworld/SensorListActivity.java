@@ -27,10 +27,34 @@ import java.util.ArrayList;
 
 public class SensorListActivity extends AppCompatActivity {
 
+
+
+    class SensorItem {
+        //        int temp, humidity; String created_at;
+//        SensorItem(int temp, int humidity, String created_at) {
+//            this.temp = temp; this.humidity = humidity; this.created_at = created_at;
+//        }
+        int id, user_id; String mac_address; String created_at;
+        SensorItem(int id, int user_id, String mac_address, String created_at) {
+            this.id = id; this.user_id = user_id; this.mac_address = mac_address;
+            this.created_at = created_at ;
+        }
+    }
+    ArrayList<SensorItem> sensor_items = new ArrayList<SensorItem>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensor_list);
+
+        Intent intent = getIntent();
+//    String sensor = intent.getStringExtra("sensor");
+//    int hauser_id = Integer.parseInt("user_id");
+        String userName = intent.getStringExtra("user_name");
+        String deviceName = intent.getStringExtra("device_name");
+        String sensorName = intent.getStringExtra("sensor_name");
+
+
 
         final String sensors[] = {"sen1", "sen2", "sen3", "sen4", "sen5"};
         ArrayAdapter<String > adapter = new ArrayAdapter<String>(
@@ -42,12 +66,18 @@ public class SensorListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(SensorListActivity.this, position+"",
                         Toast.LENGTH_LONG).show();
-//                new GetSensorLists().execute("arduino", sensors[position]);
+                new GetSensorLists().execute("arduino", sensors[position]);
 
                  Log.d(this.getClass().getName(), "haha---------before 0");
+                Log.i("result---", String.valueOf(sensor_items.get(position).id));
+
                 Intent intent = new Intent(SensorListActivity.this,
                         Arduino2Activity.class);
                 intent.putExtra("sensor", sensors[position]);
+                intent.putExtra("user_id", sensor_items.get(position).id);
+
+//                if(sensor_items.get(position).id.equals('2') )
+                intent.putExtra("sensor_name", 10);
                 startActivity(intent);
             }
         });
@@ -55,18 +85,7 @@ public class SensorListActivity extends AppCompatActivity {
     }
 
 
-    class SensorItem {
-//        int temp, humidity; String created_at;
-//        SensorItem(int temp, int humidity, String created_at) {
-//            this.temp = temp; this.humidity = humidity; this.created_at = created_at;
-//        }
-        int id, user_id; String mac_address; String created_at;
-        SensorItem(int id, int user_id, String mac_address, String created_at) {
-            this.id = id; this.user_id = user_id; this.mac_address = mac_address;
-            this.created_at = created_at ;
-        }
-    }
-    ArrayList<SensorItem> sensor_items = new ArrayList<SensorItem>();
+
     class SensorItemAdapter extends ArrayAdapter {
         public SensorItemAdapter(Context context) {
             super(context, R.layout.list_sensor_item2, sensor_items);
@@ -104,7 +123,7 @@ public class SensorListActivity extends AppCompatActivity {
             try {
                 Log.d(this.getClass().getName(), "haha---------0");
 //                String urlString = "http://192.168.0.27:3000/devices/"+params[0]+"/"+params[1];
-                String urlString = "http://192.168.0.27:3000/devices/";
+                String urlString = "http://192.168.0.24:3000/devices/";
 
 //                String urlString = "http://192.168.0.35:3000/devices/"+params[0]+"/"+params[1];
                 URL url = new URL(urlString);
@@ -144,7 +163,7 @@ public class SensorListActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             dialog.dismiss();
-            Log.i("result", s);
+            Log.i("haresulthaha", s);
 
             try {
                 JSONArray array = new JSONArray(s);//JSON 문자열 -> JSON 객체로 변환
