@@ -9,6 +9,7 @@ var index = require('./routes/index');
 var users = require('./routes/users'); // - MySQL 연동
 var logs = require('./routes/logs');   // MongoDB연동
 var devices = require('./routes/devices');
+var networks = require('./routes/networks');
 
 var app = express();
 
@@ -28,6 +29,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/logs', logs); // <--haha
 app.use('/devices', devices);
+app.use('/networks', networks);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

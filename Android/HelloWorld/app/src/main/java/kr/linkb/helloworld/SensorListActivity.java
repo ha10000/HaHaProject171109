@@ -47,16 +47,17 @@ public class SensorListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensor_list);
 
+        Log.i("ressss", "activity_sensor_list");
         Intent intent = getIntent();
 //    String sensor = intent.getStringExtra("sensor");
 //    int hauser_id = Integer.parseInt("user_id");
-        String userName = intent.getStringExtra("user_name");
+//        String userName = intent.getStringExtra("user_name");
         String deviceName = intent.getStringExtra("device_name");
         String sensorName = intent.getStringExtra("sensor_name");
 
 
-
         final String sensors[] = {"sen1", "sen2", "sen3", "sen4", "sen5"};
+        sensors[0] = sensorName;
         ArrayAdapter<String > adapter = new ArrayAdapter<String>(
                 SensorListActivity.this, android.R.layout.simple_list_item_1, sensors);
         ListView listView = (ListView)findViewById(R.id.listview);

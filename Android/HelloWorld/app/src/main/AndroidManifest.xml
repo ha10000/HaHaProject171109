@@ -67,7 +67,9 @@
         <activity android:name=".Arduino2Activity">
 
         </activity>
-        <activity android:name=".NetworkSetActivity"></activity>
+        <activity android:name=".NetworkSetActivity">
+
+        </activity>
     </application>
 
 </manifest>
