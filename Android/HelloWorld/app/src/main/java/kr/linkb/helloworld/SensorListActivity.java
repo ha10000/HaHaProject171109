@@ -25,6 +25,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import static android.text.TextUtils.isEmpty;
+
 public class SensorListActivity extends AppCompatActivity {
 
 
@@ -47,14 +49,16 @@ public class SensorListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sensor_list);
 
-        Log.i("ressss", "activity_sensor_list");
+        Log.d("test", "activity_sensor_list");
         Intent intent = getIntent();
-//    String sensor = intent.getStringExtra("sensor");
-//    int hauser_id = Integer.parseInt("user_id");
-//        String userName = intent.getStringExtra("user_name");
-        String deviceName = intent.getStringExtra("device_name");
-        String sensorName = intent.getStringExtra("sensor_name");
 
+        String sensorName = intent.getStringExtra("sensor_name");
+        if( isEmpty(sensorName)) sensorName ="empty sensorName";
+        String deviceName = intent.getStringExtra("device_name");
+        if( isEmpty(deviceName)) deviceName ="empty deviceName";
+
+        Log.d("test", "sensorName"+sensorName);;
+        Log.d("test", "deviceName"+deviceName);;
 
         final String sensors[] = {"sen1", "sen2", "sen3", "sen4", "sen5"};
         sensors[0] = sensorName;
@@ -67,18 +71,14 @@ public class SensorListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(SensorListActivity.this, position+"",
                         Toast.LENGTH_LONG).show();
-                new GetSensorLists().execute("arduino", sensors[position]);
-
-                 Log.d(this.getClass().getName(), "haha---------before 0");
-                Log.i("result---", String.valueOf(sensor_items.get(position).id));
-
+                Log.d("test", "haha---------before 0");
+                Log.d("test", "haha---------position="+position);
+                Log.d("test", "SensorListActivity to Arduino2Activity putExtra--sensor[position]"+sensors[position]);
+                Log.d("test", "haha---------position="+position);
                 Intent intent = new Intent(SensorListActivity.this,
-                        Arduino2Activity.class);
-                intent.putExtra("sensor", sensors[position]);
-                intent.putExtra("user_id", sensor_items.get(position).id);
-
-//                if(sensor_items.get(position).id.equals('2') )
-                intent.putExtra("sensor_name", 10);
+                        Arduino3Activity.class);
+                Log.d("test", "haha---------sensorList -> Arduino2 sensor_name="+"dht11");
+                intent.putExtra("sensor", "dht11");
                 startActivity(intent);
             }
         });

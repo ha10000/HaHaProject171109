@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="센서정보입니다."
+        android:text="센서 항목들 정보입니다."
         android:textSize="30dp"
         android:textColor="#0000ff"/>
     <ListView

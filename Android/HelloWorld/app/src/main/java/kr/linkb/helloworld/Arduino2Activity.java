@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,6 +24,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+import static android.text.TextUtils.isEmpty;
+import static kr.linkb.helloworld.R.id.user_id;
+
 public class Arduino2Activity extends AppCompatActivity {
 
     @Override
@@ -31,14 +35,15 @@ public class Arduino2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_arduino2);
 
         Intent intent = getIntent();
-//        String sensor = intent.getStringExtra("sensor");
-        String deviceName = intent.getStringExtra("device_name");
-        String sensorName = intent.getStringExtra("sensor_name");
-        int user_id = intent.getExtras().getInt("user_id");
-        Toast.makeText(Arduino2Activity.this, sensorName, Toast.LENGTH_SHORT).show();
-        Toast.makeText(Arduino2Activity.this, String.valueOf(user_id), Toast.LENGTH_SHORT).show();
+        String sensorName = intent.getStringExtra("sensor");
 
-        new LoadSensorLogData().execute("arduino", "dht11", String.valueOf(user_id));
+        Log.d("test", "haha---------Arduino2 from sensorList  sensor_name="+sensorName);
+        Log.d("test", "===>sensor_name at Arduino2 "+ sensorName);
+        if( isEmpty(sensorName)) sensorName ="dht11";
+
+        Toast.makeText(Arduino2Activity.this, sensorName, Toast.LENGTH_LONG).show();
+
+        new LoadSensorLogData().execute("arduino", "mq2","1");
     }
     class Item {
         int temp, humidity; String created_at;
@@ -78,6 +83,8 @@ public class Arduino2Activity extends AppCompatActivity {
             StringBuffer response = new StringBuffer();
             try {
 
+//                String apiURL = "http://192.168.0.24:3000/devices/+params[0];
+
                 String apiURL = "http://192.168.0.24:3000/devices/"+params[0]+"/"+params[1];
 //                String apiURL = "http://192.168.0.35:3000/devices/"+params[0]+"/"+params[1];
                 URL url = new URL(apiURL);
@@ -100,6 +107,7 @@ public class Arduino2Activity extends AppCompatActivity {
         }
         @Override
         protected void onPostExecute(String s) {
+            Log.d("test", "===>onPostExecute at Arduino2 "+ s);
             dialog.dismiss();
             try {
                 JSONArray array = new JSONArray(s);//JSON 문자열 -> JSON 객체로 변환

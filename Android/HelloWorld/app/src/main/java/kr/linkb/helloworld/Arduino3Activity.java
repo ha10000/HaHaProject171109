@@ -1,13 +1,12 @@
 package kr.linkb.helloworld;
+
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.annotation.LayoutRes;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,30 +24,39 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 
-public class ArduinoActivity extends AppCompatActivity {
-//17.11.09
+public class Arduino3Activity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_arduino);
-
+        setContentView(R.layout.activity_arduino3);
         Intent intent = getIntent();
         String sensorName = intent.getStringExtra("sensor");
-        Toast.makeText(ArduinoActivity.this, sensorName, Toast.LENGTH_SHORT).show();
+
+        Log.d("test", "haha--------- -> Arduino3 from sensorList sensorName="+sensorName);
+        Toast.makeText(Arduino3Activity.this, sensorName, Toast.LENGTH_SHORT).show();
+        Log.d("test", "haha--------- -> 1");
 
         final String sensors[] = { "dht11", "mq2" };
+        Log.d("test", "haha--------- -> 2");
         ArrayAdapter<String> spinnerAdapter =
-                new ArrayAdapter<String>(ArduinoActivity.this,
+                new ArrayAdapter<String>(Arduino3Activity.this,
                         android.R.layout.simple_spinner_item, sensors);
+        Log.d("test", "haha--------- -> 3");
         Spinner spinner = (Spinner)findViewById(R.id.spinner);
+        Log.d("test", "haha--------- -> 4");
         spinner.setAdapter(spinnerAdapter);
+        Log.d("test", "haha--------- -> 5");
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                new LoadSensorLogs().execute("arduino", sensors[position]);
+                Log.d("test", "haha--------- -> 6");
+                Log.d("test", "haha--------- -> spinner from sensorList position="+position);
+                new Arduino3Activity.LoadSensorLogs().execute("arduino", sensors[position]);
+                Log.d("test", "haha--------- -> 7");
             }
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
@@ -57,8 +65,14 @@ public class ArduinoActivity extends AppCompatActivity {
     }
     class Item {
         int temp, humidity; String created_at;
-        Item(int temp, int humidity, String created_at) {
+        String label1; String label2; String label3;
+//        Item(int temp, int humidity, String created_at) {
+//            this.temp = temp; this.humidity = humidity; this.created_at = created_at;
+//        }
+        Item(int temp, int humidity, String created_at, String label1, String label2, String label3) {
             this.temp = temp; this.humidity = humidity; this.created_at = created_at;
+            this.label1 = label1; this.label2 = label2; this.label3 = label3;
+
         }
     }
     ArrayList<Item> items = new ArrayList<Item>();
@@ -76,14 +90,16 @@ public class ArduinoActivity extends AppCompatActivity {
             TextView tempText = (TextView)view.findViewById(R.id.temp);
             TextView humidityText = (TextView)view.findViewById(R.id.humidity);
             TextView createdAtText = (TextView)view.findViewById(R.id.created_at);
-            tempText.setText(items.get(position).temp+"");
-            humidityText.setText(items.get(position).humidity+"");
-            createdAtText.setText(items.get(position).created_at);
+
+            Log.d("test", "haha--------- -> 10"+items.get(position).label1);
+            tempText.setText(items.get(position).label1+items.get(position).temp+"");
+            humidityText.setText(items.get(position).label2+items.get(position).humidity+"");
+            createdAtText.setText(items.get(position).label3+items.get(position).created_at);
             return view;
         }
     }
     class LoadSensorLogs extends AsyncTask<String,String,String> {
-        ProgressDialog dialog = new ProgressDialog(ArduinoActivity.this);
+        ProgressDialog dialog = new ProgressDialog(Arduino3Activity.this);
         @Override
         protected String doInBackground(String... params) {
             StringBuffer response = new StringBuffer();
@@ -106,88 +122,30 @@ public class ArduinoActivity extends AppCompatActivity {
         }
         @Override
         protected void onPreExecute() {
-            dialog.setMessage("센서 로그 정보 수신 중...");
+            dialog.setMessage("센서 로그수신중");
             dialog.show();
         }
         @Override
         protected void onPostExecute(String s) {
             dialog.dismiss();
+            Log.d("test", "haha--------- -> 8"+s);
             try {
-                JSONArray array = new JSONArray(s);//JSON 문자열 -> JSON 객체로 변환
+                JSONArray array = new JSONArray(s);//JSON 문자??-> JSON 객체�?변??
                 items.clear();
                 for (int i = 0; i < array.length(); i++) {
                     JSONObject obj = array.getJSONObject(i);
                     if (obj.getString("sensor").equals("dht11")) {
                         items.add(new Item(obj.getInt("temp"), obj.getInt("humidity"),
-                                obj.getString("created_at")));
+                                obj.getString("created_at"),"온도값 : ", "습도값 : ", "생성일 : "));
                     } else {
                         items.add(new Item(obj.getInt("digital"), obj.getInt("analog"),
-                                obj.getString("created_at")));
+                                obj.getString("created_at"), "디지탈값 : ", "아닐로그값 : ", "생성일 : "));
                     }
                 }
-                ItemAdapter adapter = new ItemAdapter(ArduinoActivity.this);
+                ItemAdapter adapter = new ItemAdapter(Arduino3Activity.this);
                 ListView listView = (ListView)findViewById(R.id.listview);
                 listView.setAdapter(adapter);
             } catch (Exception e) { e.printStackTrace(); }
-        }
-    }
-
-    public void clickBuzzerOnButton(View view) {
-        new SendBuzzerFlag().execute("buzzer","on");
-    }
-    public void clickBuzzerOffButton(View view) {
-        new SendBuzzerFlag().execute("buzzer","off");
-    }
-    public void clickRedLEDOnButton(View view) {
-        new SendBuzzerFlag().execute("led/red","on");
-    }
-    public void clickRedLEDOffButton(View view) {
-        new SendBuzzerFlag().execute("led/red","off");
-    }
-    public void clickYellowLEDOnButton(View view) {
-        new SendBuzzerFlag().execute("led/yellow","on");
-    }
-    public void clickYellowLEDOffButton(View view) {
-        new SendBuzzerFlag().execute("led/yellow","off");
-    }
-    public void clickGreenLEDOnButton(View view) {
-        new SendBuzzerFlag().execute("led/green","on");
-    }
-    public void clickGreenLEDOffButton(View view) {
-        new SendBuzzerFlag().execute("led/green","off");
-    }
-    class SendBuzzerFlag extends AsyncTask<String, String, String> {
-        ProgressDialog dialog = new ProgressDialog(ArduinoActivity.this);
-        @Override
-        protected String doInBackground(String... params) {
-            StringBuffer response = new StringBuffer();
-            try {
-                String urlString = "http://192.168.0.27:3000/devices/"+params[0]+"/"+params[1];
-//                String urlString = "http://192.168.0.35:3000/devices/"+params[0]+"/"+params[1];
-                URL url = new URL(urlString);
-                HttpURLConnection con = (HttpURLConnection)url.openConnection();
-                con.setRequestMethod("POST");
-                con.setDoInput(true); con.setDoOutput(true);
-                int responseCode = con.getResponseCode();
-                BufferedReader br;
-                if(responseCode==200) {  br = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                } else { br = new BufferedReader(new InputStreamReader(con.getErrorStream())); }
-                String inputLine;
-                while ((inputLine = br.readLine()) != null) {
-                    response.append(inputLine);
-                }
-                br.close();
-            } catch (Exception e) { e.printStackTrace(); }
-            return response.toString();
-        }
-        @Override
-        protected void onPreExecute() {
-            dialog.setMessage("부저 상태 정보 전송 중...");
-            dialog.show();
-        }
-        @Override
-        protected void onPostExecute(String s) {
-            dialog.dismiss();
         }
     }
 }

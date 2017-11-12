@@ -21,6 +21,7 @@
             android:layout_height="wrap_content"
             android:text="    IP address:"/>
         <EditText
+            android:textSize="25dp"
             android:id="@+id/ip1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,6 +31,7 @@
             android:layout_height="wrap_content"
             android:text="."/>
         <EditText
+            android:textSize="25dp"
             android:id="@+id/ip2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -39,6 +41,7 @@
             android:layout_height="wrap_content"
             android:text="."/>
         <EditText
+            android:textSize="25dp"
             android:id="@+id/ip3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -48,6 +51,7 @@
             android:layout_height="wrap_content"
             android:text="."/>
         <EditText
+            android:textSize="25dp"
             android:id="@+id/ip4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -89,6 +93,7 @@
             android:layout_height="wrap_content"
             android:text="    IP address:"/>
         <EditText
+            android:textSize="25dp"
             android:id="@+id/db_ip1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -98,6 +103,7 @@
             android:layout_height="wrap_content"
             android:text="."/>
         <EditText
+            android:textSize="25dp"
             android:id="@+id/db_ip2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -107,6 +113,7 @@
             android:layout_height="wrap_content"
             android:text="."/>
         <EditText
+            android:textSize="25dp"
             android:id="@+id/db_ip3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -116,6 +123,7 @@
             android:layout_height="wrap_content"
             android:text="."/>
         <EditText
+            android:textSize="25dp"
             android:id="@+id/db_ip4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -129,6 +137,7 @@
             android:layout_height="wrap_content"
             android:text="    PORT NO:"/>
         <EditText
+            android:textSize="25dp"
             android:id="@+id/db_port"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
