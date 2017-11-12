@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -17,7 +18,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
@@ -28,9 +34,55 @@ public class NetworkSetActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_network_set);
-       }
+
+        final EditText writeBufferEditText = (EditText)findViewById(R.id.WriteBufferEditText01);
+        final EditText readBufferEditText = (EditText)findViewById(R.id.ReadBufferEditText01);
+        final Button button_w = (Button)findViewById(R.id.ButtonWriteFile) ;
+        final Button button_r = (Button)findViewById(R.id.ButtonReadFile) ;
+        button_w.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                try {
+                    Log.d("test", "haha Write ---> ");
+                    OutputStream fout = openFileOutput("test.txt", MODE_PRIVATE);
+                    OutputStreamWriter out = new OutputStreamWriter(fout);
+                    out.write( writeBufferEditText.getText().toString() );
+                    Log.d("test", "haha Write ---> OKay");
+                    out.close();
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        button_r.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+                try {
+                    InputStream fin = openFileInput("test.txt");
+                    InputStreamReader in = new InputStreamReader(fin);
+                    BufferedReader reader = new BufferedReader(in);
+
+                    String strLine = null;
+                    StringBuffer sBuffer = new StringBuffer();
+
+                    while ((strLine = reader.readLine()) != null) {
+                        sBuffer.append(strLine + "\n");
+                    }
+                    in.close();
+                    readBufferEditText.setText( sBuffer.toString() );
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+    }
     public void ButtonNetworkSave(View view){
-        Log.i("result","ha________________________________");
+        Log.i("test","ha________________________________");
         String ip[] ={"192", "168", "1", "1"};
         String port = "80";
         String db_ip[] = {"192", "168", "1", "1"};
@@ -49,6 +101,8 @@ public class NetworkSetActivity extends AppCompatActivity {
         EditText editText_db_port = (EditText)findViewById(R.id.db_port); editText_db_port.setText(db_port);
         Log.d(this.getClass().getName(), "result------ButtonNetworkSave--------");
         Toast.makeText(NetworkSetActivity.this, "ButtonNetworkSave", Toast.LENGTH_LONG).show();
+
+
         new SaveNetworkInfo().execute(editText_ip1.getText().toString());
     }
 

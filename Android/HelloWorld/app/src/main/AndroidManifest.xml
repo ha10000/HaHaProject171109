@@ -62,12 +62,14 @@
         <activity android:name=".SensorDeleteActivity" />
         <activity android:name=".SensorListActivity" />
         <activity android:name=".Arduino2Activity" />
-        <activity android:name=".NetworkSetActivity" />
-        <activity android:name=".Arduino3Activity">
+        <activity android:name=".NetworkSetActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".Arduino3Activity">
+
         </activity>
     </application>
 

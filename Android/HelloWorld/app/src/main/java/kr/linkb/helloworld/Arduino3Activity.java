@@ -39,8 +39,11 @@ public class Arduino3Activity extends AppCompatActivity {
         Toast.makeText(Arduino3Activity.this, sensorName, Toast.LENGTH_SHORT).show();
         Log.d("test", "haha--------- -> 1");
 
+//        final String sensors[] = { "dht11 온습도센서", "mq2 가스센서 " };
         final String sensors[] = { "dht11", "mq2" };
         Log.d("test", "haha--------- -> 2");
+
+
         ArrayAdapter<String> spinnerAdapter =
                 new ArrayAdapter<String>(Arduino3Activity.this,
                         android.R.layout.simple_spinner_item, sensors);
@@ -147,5 +150,9 @@ public class Arduino3Activity extends AppCompatActivity {
                 listView.setAdapter(adapter);
             } catch (Exception e) { e.printStackTrace(); }
         }
+    }
+
+    public void onClickGraphView(View view){
+        Toast.makeText(Arduino3Activity.this, "onClickGraphView", Toast.LENGTH_LONG).show();
     }
 }

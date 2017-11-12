@@ -149,4 +149,26 @@
         android:text="\u003c 저 장 \u003e"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/WriteBufferEditText01"
+        android:hint="보관하기W"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <EditText
+        android:id="@+id/ReadBufferEditText01"
+        android:hint="보관읽기R"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:onClick="writeNetworkFile"
+        android:id="@+id/ButtonWriteFile"
+        android:text="Write to File"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:onClick="readNetworkFile"
+        android:id="@+id/ButtonReadFile"
+        android:text="Read from File"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
