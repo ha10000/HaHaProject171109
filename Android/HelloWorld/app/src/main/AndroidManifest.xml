@@ -13,7 +13,7 @@
     <uses-permission android:name="kr.linkb.android.providers.gsf.permission.READ_GSERVICES" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="ACCESS_WIFI_STATE" />
 
     <uses-feature
         android:glEsVersion="0x00020000"
@@ -50,27 +50,22 @@
         <activity android:name=".SQLiteDatabaseActivity" />
         <activity android:name=".SensorActivity" />
         <activity android:name=".SensorMonitorActivity" />
-        <activity android:name=".ArduinoActivity" >
-
-        </activity>
+        <activity android:name=".ArduinoActivity"></activity>
         <activity android:name=".SelectSensorListActivity" />
         <activity android:name=".SensorAddActivity" />
         <activity android:name=".InitScreenActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity android:name=".SensorModifyActivity" />
         <activity android:name=".SensorDeleteActivity" />
         <activity android:name=".SensorListActivity" />
         <activity android:name=".Arduino2Activity" />
-        <activity android:name=".NetworkSetActivity" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".Arduino3Activity">
-
-        </activity>
+        <activity android:name=".NetworkSetActivity"></activity>
+        <activity android:name=".Arduino3Activity"></activity>
     </application>
 
 </manifest>

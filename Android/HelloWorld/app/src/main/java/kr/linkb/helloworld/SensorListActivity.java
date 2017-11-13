@@ -3,6 +3,7 @@ package kr.linkb.helloworld;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -121,12 +122,20 @@ public class SensorListActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             StringBuffer response = new StringBuffer();
+            String sfName = "ServerInfo";
+            // 지난번 저장해놨던 사용자 입력값을 꺼내서 보여주기
+            SharedPreferences sf = getSharedPreferences(sfName, 0);
+            String ipStr = sf.getString("ip", ""); // 키값으로 꺼냄
+//                ServerIpEditText.setText(ipStr); // EditText에 반영함
+            String portStr = sf.getString("port", ""); // 키값으로 꺼냄
+//                ServerPortEditText.setText(portStr); // EditText에 반영함
+            Log.d("test", "hahah ip="+ipStr);
+            Log.d("test", "hahah----------- port="+portStr);
             try {
                 Log.d(this.getClass().getName(), "haha---------0");
 //                String urlString = "http://192.168.0.27:3000/devices/"+params[0]+"/"+params[1];
-                String urlString = "http://192.168.0.24:3000/devices/";
+                String urlString = "http://"+ipStr+portStr+"/devices/";
 
-//                String urlString = "http://192.168.0.35:3000/devices/"+params[0]+"/"+params[1];
                 URL url = new URL(urlString);
                 HttpURLConnection con = (HttpURLConnection)url.openConnection();
 //                con.setRequestMethod("POST");

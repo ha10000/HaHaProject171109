@@ -45,16 +45,26 @@ router.get('/', function(req, res, next) {
 //  IP 목록 삽입  PUT - /networks
 router.post('/', function(req, res, next) {
 
-	var user_id = req.body.user_id;
-	var mac_address = req.body.mac_address;
+	var server_ip = req.body.server_ip;
+	var server_port = req.body.server_port;
 
-	var srv_ip = req.body.srv_ip;	
-	var srv_port = req.body.srv_port;
+	var mongo_ip = req.body.mongo_ip;	
+	var mongo_port = req.body.mongo_port;
 	var mongo_ip = req.body.mongo_ip;
 	var mongo_port = req.body.mongo_port;
+console.log("hahaha");
+//console.log(JSON.stringify(req));
+	console.log("server_ip :"+server_ip);
+	console.log("server_port :"+server_port);
+	console.log("mongo_ip :"+mongo_ip);
+	console.log("mongo_port :"+mongo_port);
+	
+
+	//res.send(req);
+
 	connection.query(
 		'insert into network(srv_ip,srv_port,mongo_ip,mongo_port ) values(?,?,?,?)',
-		[ srv_ip, srv_port, mongo_ip, mongo_port], function(err, result) {
+		[ server_ip, server_port, mongo_ip, mongo_port], function(err, result) {
 			if (err) {
 				res.send(JSON.stringify(err));
 			} else {

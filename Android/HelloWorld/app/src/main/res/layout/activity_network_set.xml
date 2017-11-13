@@ -5,170 +5,132 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="kr.linkb.helloworld.SensorAddActivity">
+    tools:context="kr.linkb.helloworld.NetworkSetActivity">
+    <!--tools:context="kr.linkb.helloworld.SensorAddActivity">-->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:textColor="#0000ff"
         android:textSize="25dp"
-        android:text="연결할 서버 정보를 입력하세요"/>
+        android:textColor="#99118b"
+        android:text="연결할 서버 IP PORT 정보"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:text="  서버 IP : "
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="    IP address:"/>
+            android:layout_height="wrap_content" />
         <EditText
-            android:textSize="25dp"
-            android:id="@+id/ip1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="xxx"/>
+            android:layout_weight="50"
+            android:id="@+id/ServerIpEditText01"
+            android:hint="192.168.0.24"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
         <TextView
+            android:text="  Port: "
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="."/>
+            android:layout_height="wrap_content" />
         <EditText
-            android:textSize="25dp"
-            android:id="@+id/ip2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="xxx"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="."/>
-        <EditText
-            android:textSize="25dp"
-            android:id="@+id/ip3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="xxx"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="."/>
-        <EditText
-            android:textSize="25dp"
-            android:id="@+id/ip4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="xxx"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="    PORT NO:"/>
-        <EditText
-            android:id="@+id/port"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="xxx"/>
-    </LinearLayout>
+            android:layout_weight="60"
+            android:id="@+id/ServerPortEditText01"
+            android:hint="80"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
 
+    </LinearLayout>
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:textColor="#0000ff"
+        android:text="연결할 MongoDB IP, PORT 정보"
         android:textSize="25dp"
-        android:text="연결할 MongoDB 서버 정보를 입력하세요"/>
+        android:textColor="#99118b"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:text="  MonggoDB IP : "
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="    IP address:"/>
+            android:layout_height="wrap_content" />
         <EditText
-            android:textSize="25dp"
-            android:id="@+id/db_ip1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="xxx"/>
+            android:layout_weight="50"
+            android:id="@+id/MongoIpEditText01"
+            android:hint="192.168.0.24"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
         <TextView
+            android:text="  Port: "
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="."/>
+            android:layout_height="wrap_content" />
         <EditText
-            android:textSize="25dp"
-            android:id="@+id/db_ip2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="xxx"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="."/>
-        <EditText
-            android:textSize="25dp"
-            android:id="@+id/db_ip3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="xxx"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="."/>
-        <EditText
-            android:textSize="25dp"
-            android:id="@+id/db_ip4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="xxx"/>
+            android:layout_weight="50"
+            android:id="@+id/MongoPortEditText01"
+            android:hint="80"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
+    <TextView
+        android:textSize="25dp"
+        android:textColor="#99118b"
+        android:text="연결할 서버 MQTT PORT 정보"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
     <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:text="  MQTT서버 IP : "
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="    PORT NO:"/>
+            android:layout_height="wrap_content" />
         <EditText
-            android:textSize="25dp"
-            android:id="@+id/db_port"
+            android:layout_weight="50"
+            android:id="@+id/MqttIpEditText01"
+            android:hint="192.168.0.24"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="  Port: "
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="xxx"/>
+            android:layout_height="wrap_content" />
+        <EditText
+            android:layout_weight="60"
+            android:id="@+id/MqttPortEditText01"
+            android:hint="80"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
     </LinearLayout>
-    <Button
-        android:onClick="ButtonNetworkSave"
-        android:textSize="25dp"
-        android:text="\u003c 저 장 \u003e"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/WriteBufferEditText01"
-        android:hint="보관하기W"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <EditText
-        android:id="@+id/ReadBufferEditText01"
-        android:hint="보관읽기R"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:onClick="writeNetworkFile"
-        android:id="@+id/ButtonWriteFile"
-        android:text="Write to File"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-    <Button
-        android:onClick="readNetworkFile"
-        android:id="@+id/ButtonReadFile"
-        android:text="Read from File"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_weight="30"
+            android:onClick="writeNetworkFile"
+            android:id="@+id/ButtonWriteFile"
+            android:text="서버정보 보관"
+            android:layout_width="280dp"
+            android:layout_height="80dp" />
+        <Button
+            android:layout_weight="30"
+            android:onClick="readNetworkFile"
+            android:id="@+id/ButtonReadFile"
+            android:text="서버정보 읽기"
+            android:layout_width="280dp"
+            android:layout_height="80dp" />
+        <Button
+            android:layout_weight="30"
+            android:onClick="ButtonNetworkSave"
+            android:id="@+id/ButtonNetworkSet"
+            android:text="서버정보서버보관"
+            android:layout_width="280dp"
+            android:layout_height="80dp" />
+
+    </LinearLayout>
+
+
+
+
 </LinearLayout>
