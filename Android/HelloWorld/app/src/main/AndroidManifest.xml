@@ -46,11 +46,15 @@
         <activity android:name=".ScrollViewActivity" />
         <activity android:name=".NaverOpenAPIActivity" />
         <activity android:name=".DaumOpenAPIActivity" />
-        <activity android:name=".GoogleMapActivity" />
+        <activity android:name=".GoogleMapActivity" >
+
+            </activity>
         <activity android:name=".SQLiteDatabaseActivity" />
         <activity android:name=".SensorActivity" />
         <activity android:name=".SensorMonitorActivity" />
-        <activity android:name=".ArduinoActivity"></activity>
+        <activity android:name=".ArduinoActivity" >
+
+            </activity>
         <activity android:name=".SelectSensorListActivity" />
         <activity android:name=".SensorAddActivity" />
         <activity android:name=".InitScreenActivity">
@@ -64,8 +68,9 @@
         <activity android:name=".SensorDeleteActivity" />
         <activity android:name=".SensorListActivity" />
         <activity android:name=".Arduino2Activity" />
-        <activity android:name=".NetworkSetActivity"></activity>
-        <activity android:name=".Arduino3Activity"></activity>
+        <activity android:name=".NetworkSetActivity" />
+        <activity android:name=".Arduino3Activity" />
+        <activity android:name=".LineChartActivity1" />
     </application>
 
 </manifest>

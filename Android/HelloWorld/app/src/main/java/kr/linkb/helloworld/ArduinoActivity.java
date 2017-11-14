@@ -2,12 +2,14 @@ package kr.linkb.helloworld;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,7 +40,7 @@ public class ArduinoActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String sensorName = intent.getStringExtra("sensor");
         Toast.makeText(ArduinoActivity.this, sensorName, Toast.LENGTH_SHORT).show();
-
+Log.d("test","ArduinoActivity onCreate sensorName"+sensorName);
         final String sensors[] = { "dht11", "mq2" };
         ArrayAdapter<String> spinnerAdapter =
                 new ArrayAdapter<String>(ArduinoActivity.this,
@@ -87,9 +89,21 @@ public class ArduinoActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             StringBuffer response = new StringBuffer();
-            try {
+            String sfName = "ServerInfo";
 
-                String apiURL = "http://192.168.0.24:3000/devices/"+params[0]+"/"+params[1];
+            // 지난번 저장해놨던 사용자 입력값을 꺼내서 보여주기
+            SharedPreferences sf = getSharedPreferences(sfName, 0);
+            String ipStr = sf.getString("ip", ""); // 키값으로 꺼냄
+            String portStr = sf.getString("port", ""); // 키값으로 꺼냄
+
+            Log.d("test", "hahah in LoadSensorLogs ip="+ipStr);
+            Log.d("test", "hahah  in LoadSensorLogs----------- port="+portStr);
+            Log.d("test", "hahah  in LoadSensorLogs----------- params[0]="+params[0]);
+            Log.d("test", "hahah  in LoadSensorLogs----------- params[1]="+params[1]);
+
+
+            try {
+                String apiURL = "http://"+ipStr+":"+portStr+"/devices/"+params[0]+"/"+params[1];
 //                String apiURL = "http://192.168.0.35:3000/devices/"+params[0]+"/"+params[1];
                 URL url = new URL(apiURL);
                 HttpURLConnection con = (HttpURLConnection)url.openConnection();
@@ -161,8 +175,22 @@ public class ArduinoActivity extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             StringBuffer response = new StringBuffer();
+
+            String sfName = "ServerInfo";
+            SharedPreferences sf = getSharedPreferences(sfName, 0);
+            String ipStr = sf.getString("ip", ""); // 키값으로 꺼냄
+            String portStr = sf.getString("port", ""); // 키값으로 꺼냄
+            Log.d("test", "hahah in SendBuzzerFlag ip="+ipStr);
+            Log.d("test", "hahah  in SendBuzzerFlag----------- port="+portStr);
+
+            for(int i=0; i< params.length; i++) {
+                Log.d("test", "hahah  in SendBuzzerFlag----------- params["+i+"]=" + params[i]);
+            }
+
             try {
-                String urlString = "http://192.168.0.27:3000/devices/"+params[0]+"/"+params[1];
+                String urlString = "http://"+ipStr+":"+portStr+"/devices/"+params[0]+"/"+params[1];
+
+//                String urlString = "http://192.168.0.27:3000/devices/"+params[0]+"/"+params[1];
 //                String urlString = "http://192.168.0.35:3000/devices/"+params[0]+"/"+params[1];
                 URL url = new URL(urlString);
                 HttpURLConnection con = (HttpURLConnection)url.openConnection();

@@ -92,6 +92,8 @@ router.post('/led/:color/:flag', function(req, res, next) {
 
 router.get('/:device/:sensor', function(req, res, next) {
 	var sensorLogs = null;
+
+	console.log("haha here!!!")
 	if (req.params.sensor == 'dht11')
 		sensorLogs = dbObj.collection('dht11Logs');
 	else 

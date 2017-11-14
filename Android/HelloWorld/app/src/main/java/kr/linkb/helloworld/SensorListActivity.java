@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -84,9 +85,33 @@ public class SensorListActivity extends AppCompatActivity {
             }
         });
         new GetSensorLists().execute(sensors[0]);;
+
+        Log.d("test", "haha--------111111111111111111="+"dht11");
+        final Button button_control = (Button)findViewById(R.id.sensorControlButton) ;
+        button_control.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d("test", "clickSensorControlButton called....");
+            Intent intent = new Intent(SensorListActivity.this,
+                    ArduinoActivity.class);
+            Log.d("test", "haha---------clickSensorControlButton -> Arduino sensor_name="+"dht11");
+            intent.putExtra("sensor", "dht11");
+            startActivity(intent);
+            }
+        });
+
+        final Button button_location = (Button)findViewById(R.id.sensorLocationButton) ;
+        button_location.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Log.d("test", "sensorLocation called....");
+                Intent intent = new Intent(SensorListActivity.this,
+                        GoogleMapActivity.class);
+                Log.d("test", "haha---------clickSensorControlButton -> Arduino sensor_name="+"dht11");
+//                intent.putExtra("sensor", "dht11");
+                startActivity(intent);
+            }
+        });
+
     }
-
-
 
     class SensorItemAdapter extends ArrayAdapter {
         public SensorItemAdapter(Context context) {
@@ -115,7 +140,15 @@ public class SensorListActivity extends AppCompatActivity {
     public void clickSensorAddButton(View view) {
 //        new SensorAdd().execute("sensorName","SensorDevice");
     }
-
+    public void clickSensorControlButton()
+    {
+        Log.d("test", "clickSensorControlButton called....");
+//        Intent intent = new Intent(SensorListActivity.this,
+//                ArduinoActivity.class);
+//        Log.d("test", "haha---------clickSensorControlButton -> Arduino sensor_name="+"dht11");
+//        intent.putExtra("sensor", "dht11");
+//        startActivity(intent);
+    }
     class GetSensorLists extends AsyncTask<String, String, String> {
         ProgressDialog dialog = new ProgressDialog(SensorListActivity.this);
 
@@ -131,10 +164,16 @@ public class SensorListActivity extends AppCompatActivity {
 //                ServerPortEditText.setText(portStr); // EditText에 반영함
             Log.d("test", "hahah ip="+ipStr);
             Log.d("test", "hahah----------- port="+portStr);
+            Log.d("test", "hahah----------- GetSensorLists params[0]="+params[0]);
+//            Log.d("test", "hahah----------GetSensorLists- params[1]="+params[1]);
+
+
             try {
                 Log.d(this.getClass().getName(), "haha---------0");
 //                String urlString = "http://192.168.0.27:3000/devices/"+params[0]+"/"+params[1];
-                String urlString = "http://"+ipStr+portStr+"/devices/";
+                String urlString = "http://"+ipStr+":"+portStr+"/devices/";
+
+                Log.d("test", "hahah----------GetSensorLists- urlString="+urlString);
 
                 URL url = new URL(urlString);
                 HttpURLConnection con = (HttpURLConnection)url.openConnection();

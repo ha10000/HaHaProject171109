@@ -115,12 +115,17 @@ public class Arduino3Activity extends AppCompatActivity {
 //                ServerIpEditText.setText(ipStr); // EditText에 반영함
             String portStr = sf.getString("port", ""); // 키값으로 꺼냄
 //                ServerPortEditText.setText(portStr); // EditText에 반영함
-            Log.d("test", "hahah ip="+ipStr);
-            Log.d("test", "hahah----------- port="+portStr);
+            Log.d("test", "hahah in LoadSensorLogs ip="+ipStr);
+            Log.d("test", "hahah  in LoadSensorLogs----------- port="+portStr);
+
+            Log.d("test", "hahah  in LoadSensorLogs----------- params[0]="+params[0]);
+            Log.d("test", "hahah  in LoadSensorLogs----------- params[1]="+params[1]);
 
             try {
 
-                String apiURL = "http://192.168.0.27:3000/devices/"+params[0]+"/"+params[1];
+//                String apiURL = "http://192.168.0.27:3000/devices/"+params[0]+"/"+params[1];
+                String apiURL = "http://"+ipStr+":"+portStr+"/devices/"+params[0]+"/"+params[1];
+
 //                String apiURL = "http://192.168.0.35:3000/devices/"+params[0]+"/"+params[1];
                 URL url = new URL(apiURL);
                 HttpURLConnection con = (HttpURLConnection)url.openConnection();
